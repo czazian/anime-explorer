@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AnimeExplorer.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+80aafcb5aaf561683de9b8b21b5fce6c940b45b0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4585e388a516c288a0aec73e967382d621580bc")]
 [assembly: System.Reflection.AssemblyProductAttribute("AnimeExplorer.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AnimeExplorer.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
