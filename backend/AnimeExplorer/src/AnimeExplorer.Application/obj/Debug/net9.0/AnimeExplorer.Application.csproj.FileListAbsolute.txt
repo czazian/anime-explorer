@@ -1,0 +1,16 @@
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\bin\Debug\net9.0\AnimeExplorer.Application.deps.json
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\bin\Debug\net9.0\AnimeExplorer.Application.dll
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\bin\Debug\net9.0\AnimeExplorer.Application.pdb
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\bin\Debug\net9.0\AnimeExplorer.Domain.dll
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\bin\Debug\net9.0\AnimeExplorer.Domain.pdb
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\AnimeExplorer.Application.csproj.AssemblyReference.cache
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\AnimeExplorer.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\AnimeExplorer.Application.AssemblyInfoInputs.cache
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\AnimeExplorer.Application.AssemblyInfo.cs
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\AnimeExplorer.Application.csproj.CoreCompileInputs.cache
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\AnimeExplorer.Application.sourcelink.json
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\AnimeExp.96B0A342.Up2Date
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\AnimeExplorer.Application.dll
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\refint\AnimeExplorer.Application.dll
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\AnimeExplorer.Application.pdb
+C:\Users\koyas\RiderProjects\anime-explorer\backend\AnimeExplorer\src\AnimeExplorer.Application\obj\Debug\net9.0\ref\AnimeExplorer.Application.dll
