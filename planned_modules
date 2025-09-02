@@ -1,0 +1,43 @@
+﻿Anime Explorer – Modules & Features
+===================================
+1) Home
+- Display featured or trending anime using carousel.
+- Quick links to "Top Rated", "Upcoming", and "Seasonal".
+- News highlights (A few news).
+
+2) User Management
+- User registration, login, and logout (Login and Register handled by a Modal). 
+- User profile page: username, avatar, join date (At top, below it has user favourite anime and voice actor).
+- Manage user anime status: Watching, Completed, Plan to Watch.
+
+3) Search with Filtering
+- Search anime by title / voice actor.
+- Filter by:
+    = Season (Winter, Spring, Summer, Fall).
+    = Year.
+    = Genre (Action, Romance, Comedy, etc.).
+    = Studio.
+    = Is anime Completed / Releasing / PV Release.
+    = Release Day and Time for only Releasing anime.
+    = User Anime Status (Watching, Completed, Plan to Watch), only visible once login.
+    = Sort by popularity, rating, or release date.
+
+4) Anime Details
+- Anime info: poster, title, tags of genres, air dates, synopsis, PV, Opening, Voice Actors, Staff. 
+- Characters with voice actors.
+- Show all reviews, shows Rate.
+- User actions: Set User Anime Status, Rate, Leave Review, Add to favorite. (Accessible once login)
+- Able to count total number of user view of this anime detail.
+
+5) Admin Management
+- Manage users: ban/unban, change roles.
+- CRUD anime entries. Also support batch upload by excel files.
+- CRUD anime news.
+
+6) News Management
+- Display news from latest to oldest.
+- Filter news by by year.
+- News Content Page.
+
+7) Anime Ranking
+- A small modules that only show the anime ranking in this month and overall. 
