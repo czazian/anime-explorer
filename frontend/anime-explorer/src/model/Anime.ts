@@ -1,4 +1,13 @@
 ﻿export interface Anime {
     animeId?: string;
     animeName?: string;
+    animeImage?: string;
+    animePoster?: string;
+    animePvUrl?: string;
+    animeDescription?: string;
+    animeRating?: number;
+    animeReleaseDate?: number;
+    animeViews: number;
+    animeStatus?: string;
+    animeGenres?: string[];
 }

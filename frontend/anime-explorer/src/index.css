@@ -1,72 +1,118 @@
+/* Tailwind CSS Import */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    @apply font-poppins;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* App theme colors and styles */
+@layer base {
+    :root {
+        --background: 220 26% 6%;
+        --foreground: 210 40% 98%;
+
+        --card: 220 24% 8%;
+        --card-foreground: 210 40% 98%;
+
+        --popover: 220 24% 8%;
+        --popover-foreground: 210 40% 98%;
+
+        /* Main theme color */
+        --primary: 347 87% 61%;
+        --primary-foreground: 210 40% 98%;
+
+        --secondary: 240 30% 12%;
+        --secondary-foreground: 210 40% 90%;
+
+        --muted: 240 20% 15%;
+        --muted-foreground: 215 15% 65%;
+
+        --accent: 347 87% 61%;
+        --accent-foreground: 210 40% 98%;
+
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 210 40% 98%;
+
+        --border: 240 20% 20%;
+        --input: 240 20% 15%;
+        --ring: 347 87% 61%;
+
+        /* Anime-inspired colors but shifted toward rose */
+        --anime-pink: 347 87% 61%;
+        --anime-purple: 315 80% 65%;
+        --anime-blue: 240 100% 70%;
+        --anime-gold: 45 100% 65%;
+
+        /* Gradients */
+        --gradient-primary: linear-gradient(135deg, hsl(347 87% 61%), hsl(315 80% 65%));
+        --gradient-secondary: linear-gradient(135deg, hsl(347 87% 61%), hsl(240 100% 70%));
+        --gradient-accent: linear-gradient(135deg, hsl(347 87% 61%), hsl(0 100% 70%));
+
+        /* Shadows */
+        --shadow-anime: 0 20px 40px -10px hsl(347 87% 61% / 0.3);
+        --shadow-card: 0 10px 30px -5px hsl(220 26% 6% / 0.5);
+
+        --radius: 0.5rem;
+
+        /* Sidebar adjusted */
+        --sidebar-background: 0 0% 98%;
+        --sidebar-foreground: 240 5.3% 26.1%;
+        --sidebar-primary: 347 87% 61%;
+        --sidebar-primary-foreground: 0 0% 98%;
+        --sidebar-accent: 240 4.8% 95.9%;
+        --sidebar-accent-foreground: 240 5.9% 10%;
+        --sidebar-border: 220 13% 91%;
+        --sidebar-ring: 347 87% 61%;
+    }
+
+    .dark {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+
+        --card: 222.2 84% 4.9%;
+        --card-foreground: 210 40% 98%;
+
+        --popover: 222.2 84% 4.9%;
+        --popover-foreground: 210 40% 98%;
+
+        --primary: 347 87% 61%;
+        --primary-foreground: 210 40% 98%;
+
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+
+        --accent: 347 87% 61%;
+        --accent-foreground: 210 40% 98%;
+
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 347 87% 61%;
+
+        --sidebar-background: 240 5.9% 10%;
+        --sidebar-foreground: 240 4.8% 95.9%;
+        --sidebar-primary: 347 87% 61%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 240 3.7% 15.9%;
+        --sidebar-accent-foreground: 240 4.8% 95.9%;
+        --sidebar-border: 240 3.7% 15.9%;
+        --sidebar-ring: 347 87% 61%;
+    }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+@layer base {
+    * {
+        @apply border-border;
+    }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    body {
+        @apply bg-background text-foreground;
+    }
 }
