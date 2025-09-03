@@ -40,7 +40,7 @@ export const HomeNews = () => {
             <div className={`mb-4 w-full flex flex-row justify-between`}>
                 <div className={` ${isMobile ? "text-2xl" : "text-3xl"} font-bold`}>Latest News</div>
                 <Button
-                    onClick={() => navigate('/news')}
+                    onClick={() => navigate("/news")}
                     sx={{
                         textIndent: "capitalize",
                         color: "white",
@@ -61,7 +61,7 @@ export const HomeNews = () => {
                     newsList.map((news: News) => {
                         return (
                             <Box
-                                onClick={() => navigate('/news')}
+                                onClick={() => navigate(`/news/${news.newsId}`)}
                                 key={news.newsId}
                                 className={`${isMobile ? "w-full h-[300px]" : "w-1/2 h-[500px]"} group`}
                                 sx={{
