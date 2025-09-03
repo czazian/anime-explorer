@@ -9,7 +9,7 @@ type MobileContextType = { isMobile: boolean };
 const MobileContext = createContext<MobileContextType>({ isMobile: false });
 
 export const DeviceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const isMobile = useMediaQuery("(max-width: 887px)");
+    const isMobile = useMediaQuery("(max-width: 900px)");
     return (
         <MobileContext.Provider value={{ isMobile }}>
             {children}

@@ -9,10 +9,13 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import type {Anime} from "../../../model/Anime.ts";
 import {useDevice} from "../../../utils/MobileContext.tsx";
+import {useNavigate} from "react-router-dom";
 
 export const AnimeCarousel = () => {
     const {isMobile} = useDevice();
+    const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
 
     // const maxNumberOfSlides = 5;
 
@@ -31,7 +34,7 @@ export const AnimeCarousel = () => {
             "animeGenres": ["Action", "Drama", "Fantasy"]
         },
         {
-            "animeId": "ABE123",
+            "animeId": "Seirei Gensouki ID",
             "animeName": "Seirei Gensouki: Spirit Chronicles",
             "animeImage": "",
             "animePoster": "https://i0.wp.com/news.qoo-app.com/en/wp-content/uploads/sites/3/2020/11/20112704173133.jpg",
@@ -70,6 +73,8 @@ export const AnimeCarousel = () => {
 
     // Auto-slide effect
     useEffect(() => {
+        if (isHovered) return;
+
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) =>
                 prevIndex === animeList.length - 1 ? 0 : prevIndex + 1
@@ -77,7 +82,8 @@ export const AnimeCarousel = () => {
         }, 5000); // Change every 5 secs
 
         return () => clearInterval(interval);
-    }, [animeList.length]);
+    }, [animeList.length, isHovered]);
+
 
     const formatViews = (views: number) => {
         if (views >= 1000000) {
@@ -105,19 +111,18 @@ export const AnimeCarousel = () => {
     const currentAnime: Anime = animeList[currentIndex];
 
     return (
-        <div
-            className="relative w-full border rounded-lg shadow-lg overflow-hidden"
-            style={{
-                height: isMobile ? "600px" : "550px",
-                backgroundImage: `
-                  linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0)),
-                  url('${currentAnime.animePoster}')
-                `,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-            }}>
-            <div className={`flex h-full ${isMobile ? "gap-3" : "gap-6"} `}>
+        <div onMouseEnter={() => setIsHovered(true)}
+             onMouseLeave={() => setIsHovered(false)} 
+             className="relative w-full border rounded-lg shadow-lg overflow-hidden" style={{ height: isMobile ? "600px" : "550px" }}>
+            <div
+                className="absolute inset-0 bg-center bg-cover transition-transform duration-500 ease-in-out"
+                style={{
+                    backgroundImage: `url('${currentAnime.animePoster}')`,
+                    transform: isHovered ? "scale(1.07)" : "scale(1)",
+                }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
+            <div className={`relative flex h-full ${isMobile ? "gap-3" : "gap-6"} `}>
                 <div
                     className={`flex flex-col justify-center min-w-0 w-full ${isMobile ? "px-4 py-10 gap-3" : "px-[6rem] gap-6"}`}>
                     <div className={` ${isMobile ? "w-full" : "w-2/3"} `}>
@@ -166,6 +171,7 @@ export const AnimeCarousel = () => {
 
                     <div className="flex flex-row gap-3.5">
                         <Button
+                            onClick={() => navigate(`/anime-detail/${currentAnime.animeId}`)}
                             variant="contained"
                             disableElevation
                             className="bg-gradient-primary"
@@ -174,27 +180,24 @@ export const AnimeCarousel = () => {
                                 color: "#fff",
                                 borderRadius: "8px",
                             }}>
-                            {isMobile ? '' : <InfoIcon sx={{mr: 1}}/>} More Info
+                            {isMobile ? '' : <InfoIcon sx={{ mr: 1 }} />} More Info
                         </Button>
 
                         <Button
                             variant="contained"
                             disableElevation
-                            className={` ${isMobile ? "flex flex-row justify-center w-full flex-1" : ''} `}
+                            className={`${isMobile ? "flex flex-row justify-center w-full flex-1" : ''}`}
                             sx={{
                                 backgroundColor: "#1f2937",
                                 fontSize: isMobile ? "0.75rem" : "1rem",
                                 color: "#fff",
                                 borderRadius: "8px",
                                 border: "1px solid #111827",
-                                "&:hover": {
-                                    backgroundColor: "#374151"
-                                }
+                                "&:hover": { backgroundColor: "#374151" }
                             }}>
-                            {isMobile ? '' : <FavoriteIcon sx={{mr: 1}}/>} Add To Favourite
+                            {isMobile ? '' : <FavoriteIcon sx={{ mr: 1 }} />} Add To Favourite
                         </Button>
                     </div>
-
                 </div>
             </div>
 
