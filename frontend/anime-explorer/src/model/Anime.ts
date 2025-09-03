@@ -1,6 +1,7 @@
 ﻿export interface Anime {
     animeId?: string;
     animeName?: string;
+    animeNameJp?: string;
     animeImage?: string;
     animePoster?: string;
     animePvUrl?: string;
@@ -10,4 +11,5 @@
     animeViews: number;
     animeStatus?: string;
     animeGenres?: string[];
+    animeStudio?: string[];
 }

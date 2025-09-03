@@ -10,6 +10,11 @@ export const LoginModal = () => {
     const [loginForm, setLoginForm] = useState({ email: "", password: "" });
     const [registerForm, setRegisterForm] = useState({ username: "", email: "", password: "", confirmPassword: "" });
 
+    const toggleOptions = [
+        { value: "login", label: "Login" },
+        { value: "register", label: "Register" }
+    ];
+    
     const handleLoginSelectionChange = (_event: React.MouseEvent<HTMLElement>, newSelection: string | null) => {
         if (newSelection !== null) setLoginModalSelection(newSelection);
     };
@@ -82,34 +87,27 @@ export const LoginModal = () => {
                 onChange={handleLoginSelectionChange}
                 className="w-full bg-[#1f1f2e] p-1 rounded-md mb-6"
                 sx={{ display: "flex", gap: "4px", height: isMobile ? 36 : 40 }}>
-                <ToggleButton
-                    value="login"
-                    sx={{
-                        flex: 1,
-                        border: "none",
-                        borderRadius: "4px",
-                        color: "#96a1b1",
-                        textTransform: "none",
-                        fontSize: isMobile ? '13px' : '14px',
-                        backgroundColor: "transparent",
-                        "&.Mui-selected": { backgroundColor: "#0b0e13 !important", fontWeight: "bold", color: "white" },
-                    }}>
-                    Login
-                </ToggleButton>
-                <ToggleButton
-                    value="register"
-                    sx={{
-                        flex: 1,
-                        border: "none",
-                        borderRadius: "4px",
-                        color: "#96a1b1",
-                        textTransform: "none",
-                        fontSize: isMobile ? '13px' : '14px',
-                        backgroundColor: "transparent",
-                        "&.Mui-selected": { backgroundColor: "#0b0e13 !important", fontWeight: "bold", color: "white" },
-                    }}>
-                    Register
-                </ToggleButton>
+                {toggleOptions.map((option) => (
+                    <ToggleButton
+                        key={option.value}
+                        value={option.value}
+                        sx={{
+                            flex: 1,
+                            border: "none",
+                            borderRadius: "4px",
+                            color: "#96a1b1",
+                            textTransform: "none",
+                            fontSize: isMobile ? '13px' : '14px',
+                            backgroundColor: "transparent",
+                            "&.Mui-selected": {
+                                backgroundColor: "#0b0e13 !important",
+                                fontWeight: "bold",
+                                color: "white"
+                            },
+                        }}>
+                        {option.label}
+                    </ToggleButton>
+                ))}
             </ToggleButtonGroup>
 
             {loginModalSelection === "login" ? (
