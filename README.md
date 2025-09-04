@@ -18,10 +18,11 @@ Hi, this is a repo that I used to learn ReactJS for Frontend. Backend using Spri
 ## Versions
 - Node.js: v22.14.0
 - npm: v8.19.4
-- React: ^19.1.1
-- React DOM: ^19.1.1
+- React: ^18.3.1
+- React DOM: ^18.3.1
 - React Router DOM: ^7.8.2
 - Vite: ^7.1.2
 - TypeScript: ~5.8.3
 - TailwindCSS: ^3.4.17
 - MUI (Material UI): ^7.3.1
+
