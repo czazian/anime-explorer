@@ -1,6 +1,0 @@
-@AnimeExplorer.API_HostAddress = http://localhost:5096
-
-GET {{AnimeExplorer.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
