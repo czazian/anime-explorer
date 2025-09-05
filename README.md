@@ -25,4 +25,6 @@ Hi, this is a repo that I used to learn ReactJS for Frontend. Backend using Spri
 - TypeScript: ~5.8.3
 - TailwindCSS: ^3.4.17
 - MUI (Material UI): ^7.3.1
+- Spring Boot: 3.5.5
+- JDK: 17
 
