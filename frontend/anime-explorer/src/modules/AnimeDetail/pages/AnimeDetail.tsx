@@ -55,8 +55,8 @@ const AnimeDetail = () => {
                     </div>
 
                     <div className={`${isMobile ? "w-full mt-5" : "w-4/12 mt-10" } flex flex-col gap-4`}>
-                        { user ? <MoveStatusBox anime={anime} /> : null }
-                        <WriteReviewBox anime={anime} />
+                        { user ? <MoveStatusBox /> : null }
+                        <WriteReviewBox />
                     </div>
                 </div>
             </div>
