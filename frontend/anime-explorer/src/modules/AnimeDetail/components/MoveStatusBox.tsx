@@ -2,14 +2,13 @@ import {FormControl, MenuItem, Select, type SelectChangeEvent} from "@mui/materi
 import {useState} from "react";
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import {useDevice} from "../../../utils/MobileContext.tsx";
-import type {Anime} from "../../../model/Anime.ts";
 import UpdateIcon from '@mui/icons-material/Update';
 
-interface MoveStatusBoxProps {
-    anime: Anime;
-}
+// interface MoveStatusBoxProps {
+//     anime: Anime;
+// }
 
-export const MoveStatusBox  = ({anime}: MoveStatusBoxProps)=> {
+export const MoveStatusBox  = ()=> {
     const [status, setStatus] = useState<string>(''); // Initialize with empty string
     const {isMobile} = useDevice();
 

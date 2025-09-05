@@ -4,13 +4,10 @@ import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutl
 import {NewsDetailContent} from "../components/NewsDetailContent.tsx";
 import {NewsDetailTopInfo} from "../components/NewsDetailTopInfo.tsx";
 import {NewsShareBox} from "../components/NewsShareBox.tsx";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
 const NewsDetail = () => {
-    // Get data from Path Param
-    const newsId = useParams().newsId;
-    
     const {isMobile} = useDevice();
     const navigate = useNavigate();
 

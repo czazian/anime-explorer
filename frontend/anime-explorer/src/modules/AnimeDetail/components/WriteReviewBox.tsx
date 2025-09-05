@@ -1,19 +1,18 @@
-﻿import type {Anime} from "../../../model/Anime.ts";
-import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
+﻿import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import {useState} from "react";
 import {useMessageService} from "../../../share-component/MessageService.tsx";
 
-interface WriteReviewBoxProps {
-    anime?: Anime
-}
+// interface WriteReviewBoxProps {
+//     anime?: Anime
+// }
 
 // Declare an Interface as From Group
-interface ReviewData {
-    rating: number;
-    content: string;
-}
+// interface ReviewData {
+//     rating: number;
+//     content: string;
+// }
 
-export const WriteReviewBox = ({anime}: WriteReviewBoxProps) => {
+export const WriteReviewBox = () => {
     // Call Share Component
     const { showMessage } = useMessageService();
 
@@ -39,12 +38,12 @@ export const WriteReviewBox = ({anime}: WriteReviewBoxProps) => {
         setIsSubmitting(true);
 
         // Fill verified data into interface for submission
-        const reviewData: ReviewData = {
-            rating: selectedRating,
-            content: !reviewContent.trim()
-                ? 'No comment provided'
-                : reviewContent.trim()
-        };
+        // const reviewData: ReviewData = {
+        //     rating: selectedRating,
+        //     content: !reviewContent.trim()
+        //         ? 'No comment provided'
+        //         : reviewContent.trim()
+        // };
         
         try {
             // Submission to Backend Database

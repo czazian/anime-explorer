@@ -22,7 +22,6 @@ export const RankingContent = () => {
     const navigate = useNavigate();
     const [selectedTab, setSelectedTab] = useState("month");
     const [selectedView, setSelectedView] = useState("viewCount");
-    const [isLoading, setIsLoading] = useState(false);
 
     // Store Fetch Rank List Value
     const [rankList, setRankList] = useState<Anime[] | null>(null);

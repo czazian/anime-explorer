@@ -5,6 +5,7 @@ import RecordVoiceOverOutlinedIcon from '@mui/icons-material/RecordVoiceOverOutl
 import {useState, useEffect} from "react";
 import * as React from "react";
 import {ToggleButton, ToggleButtonGroup, Button} from "@mui/material";
+import type {News} from "../../../model/News.ts";
 
 interface NewsDetailContentProps {
     news: News;
@@ -16,10 +17,10 @@ export const NewsDetailContent = ({news}: NewsDetailContentProps) => {
     const [isReadRunning, setIsReadRunning] = useState(false);
 
     const textSizeOptions = [
-        {value: "sm", iconSize: "small", icon: HdrAutoOutlinedIcon},
-        {value: "md", iconSize: "medium", icon: HdrAutoOutlinedIcon},
-        {value: "lg", iconSize: "large", icon: HdrAutoOutlinedIcon},
-    ]
+        { value: "sm", iconSize: "small", icon: HdrAutoOutlinedIcon },
+        { value: "md", iconSize: "medium", icon: HdrAutoOutlinedIcon },
+        { value: "lg", iconSize: "large", icon: HdrAutoOutlinedIcon },
+    ] as const;
 
     const handleTextSizeChange = (_event: React.MouseEvent<HTMLElement>, newSelection: string | null) => {
         if (newSelection !== null) setTextSize(newSelection);

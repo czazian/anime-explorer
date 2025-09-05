@@ -3,7 +3,6 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import {useDevice} from "../../../utils/MobileContext.tsx";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import {IconButton} from "@mui/material";
 
 type AnimeDetailProps = {
