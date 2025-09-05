@@ -6,7 +6,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import {NavbarNavigation} from "../routes/NavbarNavigation";
 import type { User } from "../model/User";
 
-
 // Similar to Input Declarator in Angular
 // Can pass in state to control previous called component state
 export const MobileNavBar = ({
@@ -23,9 +22,9 @@ export const MobileNavBar = ({
                                 handleLogout: () => void;
 }) => {
     const location = useLocation();
-    
+
     return (
-        <Drawer anchor="left" open={open} onClose={onClose} 
+        <Drawer anchor="left" open={open} onClose={onClose}
                 sx={{
                     "& .MuiDrawer-paper": {
                         width: 260,
@@ -41,7 +40,7 @@ export const MobileNavBar = ({
                     flexDirection: "column",
                     height: "100%",
                 }}>
-                
+
                 {/* Header */}
                 <Box
                     sx={{
