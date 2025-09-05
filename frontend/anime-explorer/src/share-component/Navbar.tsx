@@ -1,40 +1,39 @@
-﻿import {useState} from "react";
-import {NavLink, useLocation} from "react-router-dom";
-import {NavbarNavigation} from "../routes/NavbarNavigation.ts";
-import {Button, Dialog, DialogContent, DialogTitle, IconButton} from "@mui/material";
+﻿// components/Navbar.tsx
+import { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { NavbarNavigation } from "../routes/NavbarNavigation.ts";
+import { Button, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import LoginIcon from '@mui/icons-material/Login';
 import CloseIcon from '@mui/icons-material/Close';
-import {LoginModal} from "../modules/home/components/LoginModal.tsx";
-import {useDevice} from "../utils/MobileContext.tsx";
+import { LoginModal } from "../modules/home/components/LoginModal.tsx";
+import { useDevice } from "../utils/MobileContext.tsx";
 import MenuIcon from '@mui/icons-material/Menu';
-import {MobileNavBar} from "./MobileNavBar.tsx";
+import { MobileNavBar } from "./MobileNavBar.tsx";
+import {useAuth} from "../utils/AuthContext.tsx";
 
 export const Navbar = () => {
     //// Variable Declaration ////
-    // Declare mobile view check
-    const {isMobile} = useDevice();
-
-    // Call navigation list from routes
+    const { isMobile } = useDevice();
     const navigation = NavbarNavigation;
-
-    // React Router hook that gives the current URL/location object.
     const location = useLocation();
 
-    // Check if the user is logged-in
-    const isUserLogin = false;
-    const isAdmin = false;
+    // Use auth context
+    const { user, logout } = useAuth();
 
-    // Set State of Variable. E.g. Controlling the Open of Login Modal
+    // Set State of Variable
     const [loginOpen, setLoginOpen] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
-    // Change the Login Modal States
     const handleOpen = () => setLoginOpen(true);
     const handleClose = () => setLoginOpen(false);
 
+    const handleLogout = () => {
+        logout();
+    };
+
     //// Return Content ////
     return (
-        <nav style={{ zIndex: "99"}} className="sticky top-0 bg-background/95 backdrop-blur-md border-b border-border">
+        <nav style={{ zIndex: "99" }} className="sticky top-0 bg-background/95 backdrop-blur-md border-b border-border">
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Nav Bar Container */}
@@ -57,10 +56,10 @@ export const Navbar = () => {
                                 {navigation
                                     // If user not login and is not admin, hide "Admin" button
                                     .filter((item) => {
-                                        if (item.name === 'Admin' && (!isUserLogin || !isAdmin)) {
+                                        if (item.name === 'Admin' && !(user?.role === 'Admin')) {
                                             return false;
-                                        } else if (item.name === 'Profile' && (!isUserLogin)) {
-                                            return false
+                                        } else if (item.name === 'Profile' && !user) {
+                                            return false;
                                         }
                                         return true;
                                     })
@@ -88,7 +87,7 @@ export const Navbar = () => {
 
                     {/* Login Control */}
                     <div className="flex items-center gap-4">
-                        {!isUserLogin ? (
+                        {!user ? (
                             <div>
                                 {/* Login Button to open dialog */}
                                 {isMobile ? '' :
@@ -122,10 +121,10 @@ export const Navbar = () => {
                                     <div className="w-full p-[1px] rounded-sm bg-gradient-primary">
                                         <div className="bg-[#0b0e13] rounded-sm py-2">
                                             <DialogTitle className="p-0 text-center relative">
-                                                <span
-                                                    className={`font-bold bg-gradient-primary bg-clip-text text-transparent ${isMobile ? 'text-xl' : 'text-2xl'} `}>
-                                                    Welcome to AnimeExplorer
-                                                </span>
+                        <span
+                            className={`font-bold bg-gradient-primary bg-clip-text text-transparent ${isMobile ? 'text-xl' : 'text-2xl'} `}>
+                          Welcome to AnimeExplorer
+                        </span>
                                                 <IconButton
                                                     aria-label="close"
                                                     onClick={handleClose}
@@ -134,44 +133,56 @@ export const Navbar = () => {
                                                         right: isMobile ? 1 : 5,
                                                         top: isMobile ? 1 : 3,
                                                         color: '#96a1b1',
-                                                        '&:hover': {color: 'white'},
+                                                        '&:hover': { color: 'white' },
                                                     }}>
                                                     <CloseIcon fontSize="small"/>
                                                 </IconButton>
                                             </DialogTitle>
                                             <DialogContent>
-                                                <LoginModal/>
+                                                <LoginModal onClose={handleClose}/>
                                             </DialogContent>
                                         </div>
                                     </div>
                                 </Dialog>
                             </div>
                         ) : (
-                            <Button variant="outlined" size="small">
-                                Logout
-                            </Button>
+                            !isMobile && (
+                                <Button
+                                    onClick={handleLogout}
+                                    variant="outlined"
+                                    size="small"
+                                    sx={{
+                                        borderColor: '#F43F5E',
+                                        color: '#F43F5E',
+                                        '&:hover': {
+                                            borderColor: '#F43F5E',
+                                            backgroundColor: '#F43F5E',
+                                            color: 'white',
+                                        },
+                                    }}>
+                                    Logout
+                                </Button>
+                            )
                         )}
                     </div>
 
                     {/* Mobile menu button */}
-                    { isMobile && (
+                    {isMobile && (
                         <>
                             <Button
                                 onClick={() => setDrawerOpen(true)}
                                 variant="text"
                                 size="small"
-                                sx={{minWidth: 0, p: 0, backgroundColor: "transparent"}}>
+                                sx={{ minWidth: 0, p: 0, backgroundColor: "transparent" }}>
                                 <MenuIcon fontSize="medium" className="text-red-600"/>
                             </Button>
 
                             <MobileNavBar
                                 open={drawerOpen}
                                 onClose={() => setDrawerOpen(false)}
-                                isUserLogin={isUserLogin}
-                                isAdmin={isAdmin}
+                                user={user}
                                 handleOpenLogin={handleOpen}
-                                handleLogout={() => {
-                                }}
+                                handleLogout={handleLogout}
                             />
                         </>
                     )}

@@ -1,9 +1,9 @@
-﻿import {useParams} from "react-router-dom";
-import {useEffect} from "react";
+﻿import {useEffect} from "react";
 import {useDevice} from "../../../utils/MobileContext.tsx";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import type {News} from "../../../model/News.ts";
 
 interface NewsDetailTopInfoProp {
     news: News;    
@@ -50,7 +50,7 @@ export const NewsDetailTopInfo = ({news}: NewsDetailTopInfoProp) => {
                         <CalendarMonthIcon
                             className="mr-1"
                             sx={{fontSize: isMobile ? '14px' : '18px'}}/>
-                        <p>{formatDate(news.newsPostDate)}</p>
+                        <p>{formatDate(news.newsPostDate!)}</p>
                     </div>
                     <div className="flex flex-row justify-between items-center">
                         <AccessTimeOutlinedIcon

@@ -1,20 +1,35 @@
-﻿import * as React from "react";
+﻿// modules/home/components/LoginModal.tsx
+import * as React from "react";
 import { useState } from "react";
 import { ToggleButton, ToggleButtonGroup, TextField, Button, Box } from "@mui/material";
 import { useDevice } from "../../../utils/MobileContext.tsx";
+import ApiRestService from "../../../rest-service/api-rest-service.ts";
+import type { UserCreationRequestModel } from "../../../constants/ApiModel/Request/UserCreationRequestModel.ts";
+import { useMessageService } from "../../../share-component/MessageService.tsx";
+import {useAuth} from "../../../utils/AuthContext.tsx";
 
-export const LoginModal = () => {
+interface LoginModalProps {
+    onClose: () => void;
+}
+
+export const LoginModal = ({ onClose }: LoginModalProps) => {
     const { isMobile } = useDevice();
-    const [loginModalSelection, setLoginModalSelection] = useState("login");
+    const { showMessage } = useMessageService();
+    const { login } = useAuth();
 
+    const [loginModalSelection, setLoginModalSelection] = useState("login");
+    const [isLoading, setIsLoading] = useState(false);
+
+    // FormGroup Creation
     const [loginForm, setLoginForm] = useState({ email: "", password: "" });
     const [registerForm, setRegisterForm] = useState({ username: "", email: "", password: "", confirmPassword: "" });
 
+    // Button List
     const toggleOptions = [
         { value: "login", label: "Login" },
         { value: "register", label: "Register" }
     ];
-    
+
     const handleLoginSelectionChange = (_event: React.MouseEvent<HTMLElement>, newSelection: string | null) => {
         if (newSelection !== null) setLoginModalSelection(newSelection);
     };
@@ -27,8 +42,93 @@ export const LoginModal = () => {
         setRegisterForm(prev => ({ ...prev, [field]: event.target.value }));
     };
 
-    const handleLoginSubmit = (event: React.FormEvent) => { event.preventDefault(); /*TODO*/ };
-    const handleRegisterSubmit = (event: React.FormEvent) => { event.preventDefault(); /*TODO*/ };
+    // Login
+    const handleLoginSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        setIsLoading(true);
+
+        const loginData = {
+            userEmail: loginForm.email,
+            userPassword: loginForm.password,
+        }
+
+        try {
+            const userObj = await ApiRestService.checkUserLogin(loginData);
+
+            if (userObj) {
+                showMessage({
+                    message: "Login Successful",
+                    severity: "success",
+                    autoHideDuration: 3000,
+                    anchorOrigin: { vertical: "top", horizontal: "center" }
+                });
+
+                // Use the context login function
+                login(userObj);
+
+                // Reset form and close modal
+                setLoginForm({ email: "", password: "" });
+                onClose();
+            }
+        } catch (err: any) {
+            showMessage({
+                message: "Invalid Email or Password",
+                severity: "error",
+                autoHideDuration: 3000,
+                anchorOrigin: { vertical: "top", horizontal: "center" }
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Register
+    const handleRegisterSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        setIsLoading(true);
+
+        const user: UserCreationRequestModel = {
+            userName: registerForm.username,
+            userEmail: registerForm.email,
+            userPassword: registerForm.password,
+        };
+
+        try {
+            // Call API
+            const response = await ApiRestService.createUser(user);
+
+            // If Successful
+            if (response) {
+                // Show Successful Message
+                showMessage({
+                    message: "Account Registration Successful",
+                    severity: "success",
+                    autoHideDuration: 3000,
+                    anchorOrigin: { vertical: "top", horizontal: "center" }
+                });
+
+                // Reset Form
+                setRegisterForm({ username: "", email: "", password: "", confirmPassword: "" });
+
+                // Switch to Log in Form
+                setLoginModalSelection("login");
+
+                // Auto-fill login form with registered email
+                setLoginForm(prev => ({ ...prev, email: user.userEmail }));
+            }
+
+        } catch (err: any) {
+            showMessage({
+                message: err.response?.data?.message || "Registration failed. Please try again.",
+                severity: "error",
+                autoHideDuration: 3000,
+                anchorOrigin: { vertical: "top", horizontal: "center" }
+            });
+
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const isLoginFormValid = loginForm.email && loginForm.password;
     const isRegisterFormValid =
@@ -41,7 +141,7 @@ export const LoginModal = () => {
     const textFieldStyles = {
         '& .MuiOutlinedInput-root': {
             color: 'white',
-            backgroundColor: 'transparent',
+            backgroundColor: '#1f1f2e',
             '& fieldset': { borderColor: '#1f1f1f', borderWidth: '1px' },
             '&:hover fieldset': { borderWidth: '2px' },
             '&.Mui-focused fieldset': { borderColor: '#f8286c', borderWidth: '2px' },
@@ -77,6 +177,10 @@ export const LoginModal = () => {
         padding: isMobile ? '8px' : '12px',
         backgroundColor: 'transparent',
         '&:hover': { opacity: 0.9, backgroundColor: 'transparent' },
+        '&.Mui-disabled': {
+            backgroundColor: '#2d3748',
+            color: '#718096'
+        }
     };
 
     return (
@@ -112,17 +216,75 @@ export const LoginModal = () => {
 
             {loginModalSelection === "login" ? (
                 <Box component="form" onSubmit={handleLoginSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: isMobile ? 2 : 3 }}>
-                    <TextField label="Email" type="email" value={loginForm.email} onChange={handleLoginFormChange('email')} required fullWidth sx={textFieldStyles} />
-                    <TextField label="Password" type="password" value={loginForm.password} onChange={handleLoginFormChange('password')} required fullWidth sx={textFieldStyles} />
-                    <Button type="submit" variant="contained" disabled={!isLoginFormValid} fullWidth className="bg-gradient-primary text-white" sx={{ ...buttonStyles, backgroundColor: isLoginFormValid ? 'transparent' : '#2d3748', '&:hover': { opacity: isLoginFormValid ? 0.9 : 1, backgroundColor: isLoginFormValid ? 'transparent' : '#2d3748' } }}>
-                        Login
+                    <TextField
+                        label="Email"
+                        type="email"
+                        value={loginForm.email}
+                        onChange={handleLoginFormChange('email')}
+                        required
+                        fullWidth
+                        sx={textFieldStyles}
+                        disabled={isLoading}
+                    />
+                    <TextField
+                        label="Password"
+                        type="password"
+                        value={loginForm.password}
+                        onChange={handleLoginFormChange('password')}
+                        required
+                        fullWidth
+                        sx={textFieldStyles}
+                        disabled={isLoading}
+                    />
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        disabled={!isLoginFormValid || isLoading}
+                        fullWidth
+                        className="bg-gradient-primary text-white"
+                        sx={{
+                            ...buttonStyles,
+                            background: !isLoginFormValid || isLoading ? '#2d3748' : 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+                            '&:hover': {
+                                opacity: (!isLoginFormValid || isLoading) ? 1 : 0.9,
+                                background: (!isLoginFormValid || isLoading) ? '#2d3748' : 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+                            }
+                        }}>
+                        {isLoading ? "Logging in..." : "Login"}
                     </Button>
                 </Box>
             ) : (
                 <Box component="form" onSubmit={handleRegisterSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: isMobile ? 2 : 3 }}>
-                    <TextField label="Username" type="text" value={registerForm.username} onChange={handleRegisterFormChange('username')} required fullWidth sx={textFieldStyles} />
-                    <TextField label="Email" type="email" value={registerForm.email} onChange={handleRegisterFormChange('email')} required fullWidth sx={textFieldStyles} />
-                    <TextField label="Password" type="password" value={registerForm.password} onChange={handleRegisterFormChange('password')} required fullWidth sx={textFieldStyles} />
+                    <TextField
+                        label="Username"
+                        type="text"
+                        value={registerForm.username}
+                        onChange={handleRegisterFormChange('username')}
+                        required
+                        fullWidth
+                        sx={textFieldStyles}
+                        disabled={isLoading}
+                    />
+                    <TextField
+                        label="Email"
+                        type="email"
+                        value={registerForm.email}
+                        onChange={handleRegisterFormChange('email')}
+                        required
+                        fullWidth
+                        sx={textFieldStyles}
+                        disabled={isLoading}
+                    />
+                    <TextField
+                        label="Password"
+                        type="password"
+                        value={registerForm.password}
+                        onChange={handleRegisterFormChange('password')}
+                        required
+                        fullWidth
+                        sx={textFieldStyles}
+                        disabled={isLoading}
+                    />
                     <TextField
                         label="Confirm Password"
                         type="password"
@@ -133,9 +295,23 @@ export const LoginModal = () => {
                         error={registerForm.confirmPassword !== '' && registerForm.password !== registerForm.confirmPassword}
                         helperText={registerForm.confirmPassword !== '' && registerForm.password !== registerForm.confirmPassword ? "Passwords don't match" : ""}
                         sx={textFieldStyles}
+                        disabled={isLoading}
                     />
-                    <Button type="submit" variant="contained" disabled={!isRegisterFormValid} fullWidth className="bg-gradient-primary text-white" sx={{ ...buttonStyles, backgroundColor: isRegisterFormValid ? 'transparent' : '#2d3748', '&:hover': { opacity: isRegisterFormValid ? 0.9 : 1, backgroundColor: isRegisterFormValid ? 'transparent' : '#2d3748' } }}>
-                        Register
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        disabled={!isRegisterFormValid || isLoading}
+                        fullWidth
+                        className="bg-gradient-primary text-white"
+                        sx={{
+                            ...buttonStyles,
+                            background: !isRegisterFormValid || isLoading ? '#2d3748' : 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+                            '&:hover': {
+                                opacity: (!isRegisterFormValid || isLoading) ? 1 : 0.9,
+                                background: (!isRegisterFormValid || isLoading) ? '#2d3748' : 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+                            }
+                        }}>
+                        {isLoading ? "Registering..." : "Register"}
                     </Button>
                 </Box>
             )}

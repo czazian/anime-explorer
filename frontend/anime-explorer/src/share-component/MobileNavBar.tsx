@@ -4,6 +4,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CloseIcon from "@mui/icons-material/Close";
 import {NavbarNavigation} from "../routes/NavbarNavigation";
+import type { User } from "../model/User";
 
 
 // Similar to Input Declarator in Angular
@@ -11,15 +12,13 @@ import {NavbarNavigation} from "../routes/NavbarNavigation";
 export const MobileNavBar = ({
                                  open,
                                  onClose,
-                                 isUserLogin,
-                                 isAdmin,
+                                 user,
                                  handleOpenLogin,
                                  handleLogout,
                              }: {
                                 open: boolean;
                                 onClose: () => void;
-                                isUserLogin: boolean;
-                                isAdmin: boolean;
+                                user: User | null;
                                 handleOpenLogin: () => void;
                                 handleLogout: () => void;
 }) => {
@@ -71,9 +70,9 @@ export const MobileNavBar = ({
                 <List sx={{flex: 1}}>
                     {NavbarNavigation
                         .filter((item) => {
-                            if (item.name === "Admin" && (!isUserLogin || !isAdmin)) {
+                            if (item.name === "Admin" && (!user || user.role !== "Admin")) {
                                 return false;
-                            } else if (item.name === "Profile" && !isUserLogin) {
+                            } else if (item.name === "Profile" && !user) {
                                 return false;
                             }
                             return true;
@@ -115,7 +114,7 @@ export const MobileNavBar = ({
 
                 {/* Login / Logout Control */}
                 <Box sx={{p: 2}}>
-                    {!isUserLogin ? (
+                    {!user ? (
                         <Button
                             fullWidth
                             variant="outlined"
@@ -143,6 +142,15 @@ export const MobileNavBar = ({
                             onClick={() => {
                                 onClose();
                                 handleLogout();
+                            }}
+                            sx={{
+                                borderColor: '#F43F5E',
+                                color: '#F43F5E',
+                                '&:hover': {
+                                    borderColor: '#F43F5E',
+                                    backgroundColor: '#F43F5E',
+                                    color: 'white',
+                                },
                             }}>
                             Logout
                         </Button>
