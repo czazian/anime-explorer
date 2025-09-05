@@ -6,10 +6,13 @@ import type {Anime} from "../../../model/Anime.ts";
 import { DetailBox } from "../components/DetailBox.tsx";
 import { DetailTab } from "../components/DetailTab.tsx";
 import {WriteReviewBox} from "../components/WriteReviewBox.tsx";
+import {MoveStatusBox} from "../components/MoveStatusBox.tsx";
+import {useAuth} from "../../../utils/AuthContext.tsx";
 
 const AnimeDetail = () => {
     const {isMobile} = useDevice();
     const {animeId} = useParams<{ animeId: string }>();
+    const {user} = useAuth();
 
     const anime: Anime = {
         "animeId": "ABE123",
@@ -51,7 +54,8 @@ const AnimeDetail = () => {
                         <DetailTab anime={anime} />
                     </div>
 
-                    <div className={`${isMobile ? "w-full mt-5" : "w-4/12 mt-10" } flex flex-col`}>
+                    <div className={`${isMobile ? "w-full mt-5" : "w-4/12 mt-10" } flex flex-col gap-4`}>
+                        { user ? <MoveStatusBox anime={anime} /> : null }
                         <WriteReviewBox anime={anime} />
                     </div>
                 </div>
