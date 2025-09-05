@@ -12,4 +12,5 @@
     animeStatus?: string;
     animeGenres?: string[];
     animeStudio?: string[];
+    rank?: number;
 }

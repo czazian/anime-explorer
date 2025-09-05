@@ -1,6 +1,7 @@
 ﻿import type {Anime} from "../../../model/Anime.ts";
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import {useState} from "react";
+import {useMessageService} from "../../../share-component/MessageService.tsx";
 
 interface WriteReviewBoxProps {
     anime?: Anime
@@ -13,7 +14,9 @@ interface ReviewData {
 }
 
 export const WriteReviewBox = ({anime}: WriteReviewBoxProps) => {
-    
+    // Call Share Component
+    const { showMessage } = useMessageService();
+
     // Declare States for Submission
     const [selectedRating, setSelectedRating] = useState(0);
     const [reviewContent, setReviewContent] = useState('');
@@ -51,7 +54,13 @@ export const WriteReviewBox = ({anime}: WriteReviewBoxProps) => {
             setSelectedRating(0);
             setReviewContent('');
 
-            alert('Review submitted successfully!');
+            // Success Msg
+            showMessage({
+                message: "Review Submitted Successfully",
+                severity: "success",
+                autoHideDuration: 3000,
+                anchorOrigin: { vertical: "top", horizontal: "center" }
+            });
         } catch (error) {
             console.error('Error submitting review:', error);
         } finally {
