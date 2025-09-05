@@ -7,7 +7,13 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     commonjsOptions: {
       include: [/node_modules/],
+      transformMixedEsModules: true
     },
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
   },
   optimizeDeps: {
     include: [
@@ -21,5 +27,10 @@ export default defineConfig({
       'react-swipeable-views-utils',
       'react-material-ui-carousel'
     ],
+  },
+  resolve: {
+    alias: {
+      '@babel/runtime': '@babel/runtime'
+    }
   }
 })
