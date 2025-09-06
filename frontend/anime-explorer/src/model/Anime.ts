@@ -13,4 +13,5 @@
     animeGenres?: string[];
     animeStudio?: string[];
     rank?: number;
+    season?: string;
 }
