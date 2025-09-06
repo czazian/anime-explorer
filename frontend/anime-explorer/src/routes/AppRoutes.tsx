@@ -4,6 +4,7 @@ import { NotFound } from "../modules/NotFound";
 import { AnimeDetail } from "../modules/AnimeDetail";
 import {News, NewsDetail} from "../modules/News";
 import {Ranking} from "../modules/Ranking";
+import {Search} from "../modules/Search";
 
 export default function AppRoutes() {
     return (
@@ -20,6 +21,9 @@ export default function AppRoutes() {
 
             {/* Ranking Module */}
             <Route path="/ranking" element={<Ranking />} />
+
+            {/* Search Module */}
+            <Route path="/search" element={<Search />} />
 
             {/* 404 Not Found */}
             <Route path="*" element={<NotFound />} /> 

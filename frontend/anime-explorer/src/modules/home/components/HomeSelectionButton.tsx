@@ -25,7 +25,7 @@ export const HomeSelectionButton = () => {
             desc: 'See what\'s releasing soon',
             bgStyle: 'bg-gradient-accent',
             iconSize: 33,
-            redirectTo: '/'
+            redirectTo: '/search?filter=upcoming'
         },
         {
             icon: StarBorderIcon,
@@ -33,7 +33,7 @@ export const HomeSelectionButton = () => {
             desc: 'Current season highlights',
             bgStyle: 'bg-gradient-secondary',
             iconSize: 45,
-            redirectTo: '/'
+            redirectTo: '/search?filter=seasonal'
         },
         {
             icon: PersonSearchIcon,
