@@ -1,19 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react({
-    babel: {
-      plugins: ['@babel/plugin-transform-runtime']
-    }
-  })],
+  plugins: [react()],
   build: {
-    commonjsOptions: {
-      include: [/node_modules/, /@babel\/runtime/],
-      transformMixedEsModules: true
-    }
-  },
-  optimizeDeps: {
-    include: ['@babel/runtime']
+    chunkSizeWarningLimit: 1000,
   }
 })
