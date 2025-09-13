@@ -36,7 +36,7 @@ It does not represent accurate or verified information, and I am not responsible
 
 ## Project Screenshot
 ### Home Page
-<img width="1906" height="907" alt="Screenshot 2025-09-13 235433" src="https://github.com/user-attachments/assets/cca69d5d-502e-4b24-af05-64df2ad70447" />
+<img width="1906" height="907" alt="Screenshot 2025-09-13 235433" src="https://github.com/user-attachments/assets/dd30ef8c-e327-4042-9772-5cde0493ee54" />
 <img width="1905" height="902" alt="Screenshot 2025-09-13 235449" src="https://github.com/user-attachments/assets/5b879fb7-953b-46a3-9829-0938868c3568" />
 
 ### Anime Details
