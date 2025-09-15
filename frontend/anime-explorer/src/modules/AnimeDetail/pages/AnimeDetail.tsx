@@ -1,6 +1,5 @@
 ﻿import {useDevice} from "../../../utils/MobileContext.tsx";
 import {useEffect} from "react";
-import {useParams} from "react-router-dom";
 import {TopBar} from "../components/TopBar.tsx";
 import type {Anime} from "../../../model/Anime.ts";
 import { DetailBox } from "../components/DetailBox.tsx";
