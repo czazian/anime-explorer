@@ -1,5 +1,5 @@
 ﻿import axios, {type AxiosInstance, type AxiosResponse} from "axios";
-import type {UserCreationRequestModel} from "../constants/ApiModel/Request/UserCreationRequestModel.ts";
+import type {UserCreationRequestModel} from "../model/ApiModel/Request/UserCreationRequestModel.ts";
 import { ApiConstant } from "./api-constant.ts";
 
 const API: AxiosInstance = axios.create({
@@ -30,7 +30,7 @@ export const ApiRestService = {
 
     createUser: async (userData: UserCreationRequestModel): Promise<any> => {
         try {
-            const response: AxiosResponse<any> = await API.post(`${ENDPOINT.USER_MODULE.USER + ENDPOINT.USER_MODULE.USER_REGISTER}`, userData);
+            const response: AxiosResponse<any> = await API.post(`${ENDPOINT.USER_MODULE.USER + ENDPOINT.USER_MODULE.USER_REGISTER}`, userData, {headers: { "Content-Type": "multipart/form-data" }});
             return response.data;
         } catch (error) {
             console.error("Error creating user:", error);
@@ -38,12 +38,20 @@ export const ApiRestService = {
         }
     },
 
-    updateUser: async (id: string, userData: any): Promise<any> => {
+    updateProfile: async (userId: string, userData: FormData): Promise<any> => {
         try {
-            const response: AxiosResponse<any> = await API.put(`${ENDPOINT.USER_MODULE.USER}/${id}`, userData);
-            return response.data;
+            const response: AxiosResponse<any> = await API.put(
+                `${ENDPOINT.USER_MODULE.USER}${ENDPOINT.USER_MODULE.UPDATE_PROFILE}/${userId}`,
+                userData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            );
+            return response.data.data;
         } catch (error) {
-            console.error(`Error updating user ${id}:`, error);
+            console.error(`Error updating user ${userId}:`, error);
             throw error;
         }
     },

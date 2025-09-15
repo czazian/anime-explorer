@@ -11,7 +11,7 @@ import {useAuth} from "../../../utils/AuthContext.tsx";
 
 const AnimeDetail = () => {
     const {isMobile} = useDevice();
-    const {animeId} = useParams<{ animeId: string }>();
+    // const {animeId} = useParams<{ animeId: string }>();
     const {user} = useAuth();
 
     const anime: Anime = {
@@ -31,7 +31,6 @@ const AnimeDetail = () => {
     }
 
     useEffect(() => {
-        console.log("Anime ID: ", animeId);
     }, []);
 
     return (

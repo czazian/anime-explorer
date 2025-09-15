@@ -1,5 +1,5 @@
 export interface User {
-    createdAt: Date;
+    createdAt: number;
     userId: string;
     username: string;
     profileImage: string | null;

@@ -5,6 +5,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 
 interface AuthContextType {
     user: User | null;
+    setUser: (user: User | null) => void;
     login: (userData: User) => void;
     logout: () => void;
     isLoading: boolean;
@@ -50,7 +51,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+        <AuthContext.Provider value={{ user, setUser, login, logout, isLoading }}>
             {children}
         </AuthContext.Provider>
     );

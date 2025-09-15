@@ -1,23 +1,23 @@
-﻿import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { NavbarNavigation } from "../routes/NavbarNavigation.ts";
-import { Button, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+﻿import {useState} from "react";
+import {NavLink, useLocation} from "react-router-dom";
+import {NavbarNavigation} from "../routes/NavbarNavigation.ts";
+import {Button, Dialog, DialogContent, DialogTitle, IconButton} from "@mui/material";
 import LoginIcon from '@mui/icons-material/Login';
 import CloseIcon from '@mui/icons-material/Close';
-import { LoginModal } from "../modules/home/components/LoginModal.tsx";
-import { useDevice } from "../utils/MobileContext.tsx";
+import {LoginModal} from "../modules/home/components/LoginModal.tsx";
+import {useDevice} from "../utils/MobileContext.tsx";
 import MenuIcon from '@mui/icons-material/Menu';
-import { MobileNavBar } from "./MobileNavBar.tsx";
+import {MobileNavBar} from "./MobileNavBar.tsx";
 import {useAuth} from "../utils/AuthContext.tsx";
 
 export const Navbar = () => {
     //// Variable Declaration ////
-    const { isMobile } = useDevice();
+    const {isMobile} = useDevice();
     const navigation = NavbarNavigation;
     const location = useLocation();
 
     // Use auth context
-    const { user, logout } = useAuth();
+    const {user, logout} = useAuth();
 
     // Set State of Variable
     const [loginOpen, setLoginOpen] = useState(false);
@@ -32,7 +32,7 @@ export const Navbar = () => {
 
     //// Return Content ////
     return (
-        <nav style={{ zIndex: "99" }} className="sticky top-0 bg-background/95 backdrop-blur-md border-b border-border">
+        <nav style={{zIndex: "99"}} className="sticky top-0 bg-background/95 backdrop-blur-md border-b border-border">
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Nav Bar Container */}
@@ -120,10 +120,10 @@ export const Navbar = () => {
                                     <div className="w-full p-[1px] rounded-sm bg-gradient-primary">
                                         <div className="bg-[#0b0e13] rounded-sm py-2">
                                             <DialogTitle className="p-0 text-center relative">
-                        <span
-                            className={`font-bold bg-gradient-primary bg-clip-text text-transparent ${isMobile ? 'text-xl' : 'text-2xl'} `}>
-                          Welcome to AnimeExplorer
-                        </span>
+                                                <span
+                                                    className={`font-bold bg-gradient-primary bg-clip-text text-transparent ${isMobile ? 'text-xl' : 'text-2xl'} `}>
+                                                  Welcome to AnimeExplorer
+                                                </span>
                                                 <IconButton
                                                     aria-label="close"
                                                     onClick={handleClose}
@@ -132,7 +132,7 @@ export const Navbar = () => {
                                                         right: isMobile ? 1 : 5,
                                                         top: isMobile ? 1 : 3,
                                                         color: '#96a1b1',
-                                                        '&:hover': { color: 'white' },
+                                                        '&:hover': {color: 'white'},
                                                     }}>
                                                     <CloseIcon fontSize="small"/>
                                                 </IconButton>
@@ -172,7 +172,7 @@ export const Navbar = () => {
                                 onClick={() => setDrawerOpen(true)}
                                 variant="text"
                                 size="small"
-                                sx={{ minWidth: 0, p: 0, backgroundColor: "transparent" }}>
+                                sx={{minWidth: 0, p: 0, backgroundColor: "transparent"}}>
                                 <MenuIcon fontSize="medium" className="text-red-600"/>
                             </Button>
 

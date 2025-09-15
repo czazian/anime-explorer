@@ -5,6 +5,7 @@ import { AnimeDetail } from "../modules/AnimeDetail";
 import {News, NewsDetail} from "../modules/News";
 import {Ranking} from "../modules/Ranking";
 import {Search} from "../modules/Search";
+import {Profile} from "../modules/Profile";
 
 export default function AppRoutes() {
     return (
@@ -24,6 +25,11 @@ export default function AppRoutes() {
 
             {/* Search Module */}
             <Route path="/search" element={<Search />} />
+
+            {/* Profile Module */}
+            <Route path="/profile" element={<Profile />} />
+
+            {/* Admin Module */}
 
             {/* 404 Not Found */}
             <Route path="*" element={<NotFound />} /> 
