@@ -1,16 +1,18 @@
 package com.animeexplorer.animeexplorer.service;
 
+import com.animeexplorer.animeexplorer.dto.request.UpdateUserRequestModal;
 import com.animeexplorer.animeexplorer.dto.request.UserCreationRequestModel;
 import com.animeexplorer.animeexplorer.dto.request.UserLoginRequestModel;
 import com.animeexplorer.animeexplorer.entity.UserBean;
 import com.animeexplorer.animeexplorer.repository.UserRepository;
+import com.animeexplorer.animeexplorer.util.CloudinaryService;
 import com.animeexplorer.animeexplorer.util.PasswordUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -21,6 +23,7 @@ import java.security.spec.InvalidKeySpecException;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CloudinaryService cloudinaryService;
 
     @Override
     public boolean createUser(UserCreationRequestModel requestModel) throws Exception {
@@ -56,6 +59,27 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-
+    public UserBean updateUserProfile(String userId, UpdateUserRequestModal requestModel) {
+        return userRepository.findById(userId)
+                .map(userBean -> {
+                    if (requestModel.getUsername() != null) {
+                        userBean.setUsername(requestModel.getUsername());
+                    }
+                    if (requestModel.getProfileDescription() != null) {
+                        userBean.setProfileDescription(requestModel.getProfileDescription());
+                    }
+                    if (requestModel.getProfileImage() != null) {
+                        try {
+                            String imageUrl = cloudinaryService.uploadFile(requestModel.getProfileImage(), userId);
+                            userBean.setProfileImage(imageUrl);
+                        } catch (IOException e) {
+                            throw new RuntimeException("Failed to upload image to Cloudinary", e);
+                        }
+                    }
+                    userRepository.save(userBean);
+                    return userBean;
+                })
+                .orElse(null);
+    }
 
 }

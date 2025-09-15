@@ -14,7 +14,6 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import StarIcon from '@mui/icons-material/Star';
 import type {Anime} from "../../../model/Anime.ts";
 import {useNavigate, useSearchParams} from "react-router-dom";
-
 import {FilterService, type FilterPayload} from "../../../utils/FilterService.ts";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
@@ -81,6 +80,27 @@ export const SearchTopBar = () => {
         {label: "Status", key: "status", options: statusOptions, filterType: "select"}
     ];
 
+    // Memoize filter payload to prevent unnecessary recalculations
+    const filterPayload = useMemo((): FilterPayload => {
+        const payload: FilterPayload = {
+            sortBy: selectedSort
+        };
+
+        // Add search term if present
+        if (searchTerm.trim()) {
+            payload.search = searchTerm.trim();
+        }
+
+        // Add filter values if present
+        Object.entries(filterValues).forEach(([key, value]) => {
+            if (value) {
+                payload[key as keyof FilterPayload] = value;
+            }
+        });
+
+        return payload;
+    }, [filterValues, selectedSort, searchTerm]);
+
     // Function to handle URL parameters
     const applyUrlFilters = () => {
         const filterParam = searchParams.get('filter');
@@ -111,27 +131,6 @@ export const SearchTopBar = () => {
                 season: currentSeason
             }));
         }
-    };
-
-    // Generate filter payload using FilterService structure
-    const generateFilterPayload = (): FilterPayload => {
-        const payload: FilterPayload = {
-            sortBy: selectedSort
-        };
-
-        // Add search term if present
-        if (searchTerm.trim()) {
-            payload.search = searchTerm.trim();
-        }
-
-        // Add filter values if present
-        Object.entries(filterValues).forEach(([key, value]) => {
-            if (value) {
-                payload[key as keyof FilterPayload] = value;
-            }
-        });
-
-        return payload;
     };
 
     // Handle filter change
@@ -258,22 +257,20 @@ export const SearchTopBar = () => {
         }
     }, [originalAnimeList, searchParams]);
 
-    // Apply filters whenever filter values change
+    // Apply filters using the memoized payload
     useEffect(() => {
         if (originalAnimeList.length === 0) return;
 
-        const payload = generateFilterPayload();
-
-        if (!FilterService.validateFilterPayload(payload)) {
+        if (!FilterService.validateFilterPayload(filterPayload)) {
             console.warn('Invalid filter payload');
             return;
         }
 
         // Apply filters using FilterService
-        const filteredResults = FilterService.applyFilters(originalAnimeList, payload);
+        const filteredResults = FilterService.applyFilters(originalAnimeList, filterPayload);
         setFilteredAnimeList(filteredResults);
 
-    }, [originalAnimeList, filterValues, selectedSort, searchTerm]);
+    }, [originalAnimeList, filterPayload]); // Now only depends on memoized payload
 
     const formatViews = (views: number) => {
         if (views >= 1000000) {
@@ -284,8 +281,7 @@ export const SearchTopBar = () => {
 
     // Check if any filters are active using FilterService
     const hasActiveFilters = () => {
-        const payload = generateFilterPayload();
-        return FilterService.hasActiveFilters(payload, searchTerm);
+        return FilterService.hasActiveFilters(filterPayload, searchTerm);
     };
 
     // Clear all filters using FilterService

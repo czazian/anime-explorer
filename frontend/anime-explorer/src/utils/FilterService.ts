@@ -186,14 +186,6 @@ export class FilterService {
     }
 
     /**
-     * Helper method to determine season from year (placeholder logic)
-     */
-    private static getSeasonFromYear(year: number): string {
-        const seasons = ['winter', 'spring', 'summer', 'fall'];
-        return seasons[year % 4];
-    }
-
-    /**
      * Validate filter payload
      */
     static validateFilterPayload(payload: FilterPayload): boolean {

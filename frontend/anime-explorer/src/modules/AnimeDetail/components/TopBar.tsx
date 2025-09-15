@@ -2,7 +2,6 @@
 import {useEffect} from "react";
 import {useDevice} from "../../../utils/MobileContext.tsx";
 
-// Work like Input Declarator
 type TopBarProp = {
     anime: Anime;
 };
@@ -11,7 +10,6 @@ export const TopBar = ({anime}: TopBarProp) => {
     const { isMobile } = useDevice();
     
     useEffect(() => {
-        console.log('AnimeDetails TOP BAR: ', anime);
     }, []);
     
     return (

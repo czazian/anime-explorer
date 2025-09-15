@@ -1,5 +1,6 @@
 package com.animeexplorer.animeexplorer.controller;
 
+import com.animeexplorer.animeexplorer.dto.request.UpdateUserRequestModal;
 import com.animeexplorer.animeexplorer.dto.request.UserCreationRequestModel;
 import com.animeexplorer.animeexplorer.dto.request.UserLoginRequestModel;
 import com.animeexplorer.animeexplorer.dto.response.ResponseModel;
@@ -8,11 +9,11 @@ import com.animeexplorer.animeexplorer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Objects;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 @RestController
 @RequestMapping("/users")
@@ -70,6 +71,42 @@ public class UserController {
                     .build();
 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+    @PutMapping(value = "/update-profile/{userId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ResponseModel<UserBean>> updateUserProfile(@PathVariable String userId, @ModelAttribute UpdateUserRequestModal requestModal) throws Exception {
+        log.info("[PUT] User profile update with id: {}", userId);
+
+        try {
+            UserBean userBean = userService.updateUserProfile(userId, requestModal);
+
+            if (!ObjectUtils.isEmpty(userBean)) {
+                ResponseModel<UserBean> response = ResponseModel.<UserBean>builder()
+                        .success(true)
+                        .message("Profile updated successfully")
+                        .data(userBean)
+                        .build();
+
+                return ResponseEntity.status(HttpStatus.OK).body(response);
+            } else {
+                ResponseModel<UserBean> response = ResponseModel.<UserBean>builder()
+                        .success(false)
+                        .message("Profile updated successfully")
+                        .data(null)
+                        .build();
+
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+            }
+        } catch (MaxUploadSizeExceededException e) {
+            log.error("File size exceeded: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ResponseModel.<UserBean>builder()
+                            .success(false)
+                            .message("File size exceeds the maximum allowed limit of 10MB")
+                            .data(null)
+                            .build());
+
         }
     }
 

@@ -1,12 +1,12 @@
-﻿// modules/home/components/LoginModal.tsx
-import * as React from "react";
+﻿import * as React from "react";
 import { useState } from "react";
 import { ToggleButton, ToggleButtonGroup, TextField, Button, Box } from "@mui/material";
 import { useDevice } from "../../../utils/MobileContext.tsx";
 import ApiRestService from "../../../rest-service/api-rest-service.ts";
-import type { UserCreationRequestModel } from "../../../constants/ApiModel/Request/UserCreationRequestModel.ts";
+import type { UserCreationRequestModel } from "../../../model/ApiModel/Request/UserCreationRequestModel.ts";
 import { useMessageService } from "../../../share-component/MessageService.tsx";
 import {useAuth} from "../../../utils/AuthContext.tsx";
+import {AnimeExplorerConstants} from "../../../constants/anime-explorer-constant.ts";
 
 interface LoginModalProps {
     onClose: () => void;
@@ -16,6 +16,8 @@ export const LoginModal = ({ onClose }: LoginModalProps) => {
     const { isMobile } = useDevice();
     const { showMessage } = useMessageService();
     const { login } = useAuth();
+    const textFieldStyles = AnimeExplorerConstants.textFieldStyles(isMobile);
+    const buttonStyles = AnimeExplorerConstants.buttonStyles(isMobile);
 
     const [loginModalSelection, setLoginModalSelection] = useState("login");
     const [isLoading, setIsLoading] = useState(false);
@@ -137,51 +139,6 @@ export const LoginModal = ({ onClose }: LoginModalProps) => {
         registerForm.password &&
         registerForm.confirmPassword &&
         registerForm.password === registerForm.confirmPassword;
-
-    const textFieldStyles = {
-        '& .MuiOutlinedInput-root': {
-            color: 'white',
-            backgroundColor: '#1f1f2e',
-            '& fieldset': { borderColor: '#1f1f1f', borderWidth: '1px' },
-            '&:hover fieldset': { borderWidth: '2px' },
-            '&.Mui-focused fieldset': { borderColor: '#f8286c', borderWidth: '2px' },
-            '&.Mui-error fieldset': { borderColor: '#ff4444 !important', borderWidth: '2px !important' },
-            '&.Mui-error:hover fieldset': { borderColor: '#ff4444 !important' },
-            '&.Mui-error.Mui-focused fieldset': { borderColor: '#ff4444 !important' },
-            '& .MuiInputBase-input': {
-                fontSize: isMobile ? '12px' : '14px',
-                padding: isMobile ? '8px 10px' : '12px 14px',
-            },
-        },
-        '& .MuiInputLabel-root': {
-            color: '#96a1b1',
-            fontSize: isMobile ? '12px' : '14px',
-            transform: 'translate(14px, 12px) scale(1)',
-            '&.Mui-focused': { color: '#f8286c', transform: 'translate(14px, -9px) scale(0.75)' },
-            '&.MuiInputLabel-shrink': { transform: 'translate(14px, -9px) scale(0.75)' },
-            '&.Mui-error': { color: '#ff4444' },
-            '&.Mui-error.Mui-focused': { color: '#ff4444' },
-        },
-        '& .MuiFormHelperText-root': {
-            color: '#ff4444',
-            fontSize: isMobile ? '10px' : '12px',
-            marginLeft: 0,
-            marginTop: '4px',
-        },
-    };
-
-    const buttonStyles = {
-        textTransform: 'none',
-        fontSize: isMobile ? '14px' : '16px',
-        fontWeight: '600',
-        padding: isMobile ? '8px' : '12px',
-        backgroundColor: 'transparent',
-        '&:hover': { opacity: 0.9, backgroundColor: 'transparent' },
-        '&.Mui-disabled': {
-            backgroundColor: '#2d3748',
-            color: '#718096'
-        }
-    };
 
     return (
         <div className={`rounded-lg py-2 ${isMobile ? "px-1 w-full" : "px-6 "} `}>

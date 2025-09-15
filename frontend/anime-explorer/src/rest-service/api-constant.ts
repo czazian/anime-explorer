@@ -3,6 +3,7 @@ const USER_MODULE = {
     USER: "/users",
     USER_REGISTER: "/register",
     USER_LOGIN: "/login",
+    UPDATE_PROFILE: "/update-profile",
 }
 
 const ANIME_MODULE = {

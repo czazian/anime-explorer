@@ -69,7 +69,7 @@ export const WriteReviewBox = () => {
     };
 
     return (
-        <div className="border border-gray-800 rounded-xl p-6 min-w-[300px]">
+        <div className="border border-gray-800 rounded-xl p-6 min-w-[330px]">
             <p className="sm:text-lg md:text-xl lg:text-xl">
                 <DriveFileRenameOutlineOutlinedIcon className="mr-2 mb-1"/>
                 Write Review
