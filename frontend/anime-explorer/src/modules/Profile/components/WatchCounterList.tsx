@@ -5,10 +5,13 @@ import {useDevice} from "../../../utils/MobileContext.tsx";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import StarIcon from '@mui/icons-material/Star';
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import {useNavigate} from "react-router-dom";
+import type {Anime} from "../../../model/Anime.ts";
 
 export const WatchCounterList = () => {
     const [tabSelection, setTabSelection] = useState("watching");
     const {isMobile} = useDevice();
+    const navigate = useNavigate();
 
     const handleDetailTabSelectionChange = (_event: React.MouseEvent<HTMLElement>, newSelection: string | null) => {
         if (newSelection !== null) setTabSelection(newSelection);
@@ -128,7 +131,7 @@ export const WatchCounterList = () => {
 
         return (
           <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
-              {categoryObj[tabSelection].map(anime => (
+              {categoryObj[tabSelection]?.map((anime: Anime) => (
                   <Box
                       onClick={() => navigate(`/anime-detail/${anime.animeId}`)}
                       key={anime.animeId}
@@ -236,7 +239,7 @@ export const WatchCounterList = () => {
                 exclusive
                 onChange={handleDetailTabSelectionChange}
                 className="w-full bg-[#1f1f2e] p-1 rounded-md mb-2"
-                sx={{display: "flex", gap: "4px", height: isMobile ? 36 : 40}}>
+                sx={{display: "flex", gap: "4px", height: isMobile ? 65 : 40}}>
                 {tabOptions.map((option) => (
                     <ToggleButton
                         key={option.value}
@@ -249,6 +252,8 @@ export const WatchCounterList = () => {
                             textTransform: "none",
                             fontSize: isMobile ? '13px' : '14px',
                             backgroundColor: "transparent",
+                            whiteSpace: "normal",
+                            wordBreak: "break-word",
                             "&.Mui-selected": {
                                 backgroundColor: "#0b0e13 !important",
                                 fontWeight: "bold",
