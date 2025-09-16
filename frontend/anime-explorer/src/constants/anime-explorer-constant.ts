@@ -31,7 +31,7 @@
         },
     }),
 
-     buttonStyles: (isMobile: boolean) => ({
+    buttonStyles: (isMobile: boolean) => ({
         textTransform: 'none',
         fontSize: isMobile ? '14px' : '16px',
         fontWeight: '600',
@@ -40,8 +40,38 @@
         '&:hover': { opacity: 0.9, backgroundColor: 'transparent' },
         '&.Mui-disabled': {
             backgroundColor: '#2d3748',
-            color: '#718096'
-        }
+            color: '#718096',
+        },
     }),
 
+    userColumns: [
+        { id: 'user', label: 'User', minWidth: 200 },
+        { id: 'role', label: 'Role', minWidth: 100 },
+        { id: 'status', label: 'Status', minWidth: 100 },
+        { id: 'joinedDate', label: 'Joined Date', minWidth: 100 },
+        { id: 'actions', label: 'Actions', minWidth: 50 },
+    ] as const,
+
+    animeColumns: [
+        { id: 'animePoster', label: 'Poster', minWidth: 80 },
+        { id: 'titleEN', label: 'Title', minWidth: 200 },
+        { id: 'titleJP', label: 'Japanese Title', minWidth: 200 },
+        { id: 'releaseDate', label: 'Release Date', minWidth: 130 },
+        { id: 'status', label: 'Status', minWidth: 100 },
+        { id: 'genres', label: 'Genres', minWidth: 150 },
+        { id: 'studios', label: 'Studios', minWidth: 150 },
+        { id: 'description', label: 'Description', minWidth: 100 },
+        { id: 'character', label: 'Characters', minWidth: 200 },
+        { id: 'Staff', label: 'Staff', minWidth: 200 },
+        { id: 'pv', label: 'PV', minWidth: 100 },
+    ] as const,
+
+    newsColumns: [
+        { id: 'newsPoster', label: 'Poster', minWidth: 100 },
+        { id: 'newsAuthor', label: 'Author', minWidth: 200 },
+        { id: 'postedDate', label: 'Posted Date', minWidth: 120 },
+        { id: 'newsTitle', label: 'Title', minWidth: 200 },
+        { id: 'newsDescription', label: 'Description', minWidth: 100 },
+        { id: 'newsContent', label: 'Content', minWidth: 100 },
+    ] as const,
 };
