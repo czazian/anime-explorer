@@ -131,7 +131,7 @@ export const WatchCounterList = () => {
 
         return (
           <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
-              {categoryObj[tabSelection]?.map((anime: Anime) => (
+              {(categoryObj as any)?.[tabSelection]?.map((anime: Anime) => (
                   <Box
                       onClick={() => navigate(`/anime-detail/${anime.animeId}`)}
                       key={anime.animeId}

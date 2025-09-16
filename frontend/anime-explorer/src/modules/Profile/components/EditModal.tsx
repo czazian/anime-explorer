@@ -70,6 +70,13 @@ export const EditModal = ({onClose}: EditModalProps) => {
             sessionStorage.setItem("user", JSON.stringify(updatedUser));
             setIsLoading(false);
             onClose();
+
+            showMessage({
+                message: "Profile Updated Successfully",
+                severity: "success",
+                autoHideDuration: 3000,
+                anchorOrigin: {vertical: "top", horizontal: "center"}
+            });
         } catch (error) {
             setIsLoading(false);
             console.error("Failed to update profile:", error);

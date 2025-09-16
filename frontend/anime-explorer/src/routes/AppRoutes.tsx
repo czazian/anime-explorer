@@ -6,6 +6,7 @@ import {News, NewsDetail} from "../modules/News";
 import {Ranking} from "../modules/Ranking";
 import {Search} from "../modules/Search";
 import {Profile} from "../modules/Profile";
+import {Admin} from "../modules/Admin";
 
 export default function AppRoutes() {
     return (
@@ -30,6 +31,7 @@ export default function AppRoutes() {
             <Route path="/profile" element={<Profile />} />
 
             {/* Admin Module */}
+            <Route path="/admin" element={<Admin />} />
 
             {/* 404 Not Found */}
             <Route path="*" element={<NotFound />} /> 
