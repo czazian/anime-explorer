@@ -64,7 +64,9 @@ It does not represent accurate or verified information, and I am not responsible
 
 
 ### Admin Management
-- Not Yet Completed.
+<img width="1917" height="906" alt="Screenshot 2025-09-16 162934" src="https://github.com/user-attachments/assets/5ff6cd1e-f9f0-4bf6-9476-a0a11b0b0c66" />
+<img width="1918" height="907" alt="Screenshot 2025-09-16 162945" src="https://github.com/user-attachments/assets/04ac3118-809c-42aa-82f7-9856c8eeb486" />
+<img width="1918" height="907" alt="Screenshot 2025-09-16 163002" src="https://github.com/user-attachments/assets/50bf01d0-091a-4b92-b73f-82de7f2e8637" />
 
 
 
