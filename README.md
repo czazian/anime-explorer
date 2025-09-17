@@ -5,7 +5,7 @@ Description: A web app where users can browse anime titles, view details, and sa
 1 Sep 2025
 
 ## Message From Repo Owner
-Hi, this is a repo that I used to learn ReactJS for Frontend. Backend using Spring Boot Currently, this app is under development started from 1 Sep 2025.
+Hi, this is a repo that I used to learn ReactJS for Frontend. Backend using Spring Boot. Currently, this app is under development started from 1 Sep 2025.
 
 ## Technology Stacks Used:
 - ReactJS
@@ -64,9 +64,9 @@ It does not represent accurate or verified information, and I am not responsible
 
 
 ### Admin Management
-<img width="1917" height="906" alt="Screenshot 2025-09-16 162934" src="https://github.com/user-attachments/assets/5ff6cd1e-f9f0-4bf6-9476-a0a11b0b0c66" />
-<img width="1918" height="907" alt="Screenshot 2025-09-16 162945" src="https://github.com/user-attachments/assets/04ac3118-809c-42aa-82f7-9856c8eeb486" />
-<img width="1918" height="907" alt="Screenshot 2025-09-16 163002" src="https://github.com/user-attachments/assets/50bf01d0-091a-4b92-b73f-82de7f2e8637" />
+<img width="1919" height="908" alt="Screenshot 2025-09-17 171448" src="https://github.com/user-attachments/assets/d085e3f2-41bd-429c-9eb2-1091e4057c90" />
+<img width="1919" height="910" alt="Screenshot 2025-09-17 171507" src="https://github.com/user-attachments/assets/34ed5ac7-73e2-42ec-9d94-40ca191580dd" />
+<img width="1919" height="910" alt="Screenshot 2025-09-17 171523" src="https://github.com/user-attachments/assets/875b4f4d-eb73-4c70-b088-7e615ce28ad6" />
 
 
 
