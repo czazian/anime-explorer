@@ -1,6 +1,9 @@
 # anime-explorer
 Description: A web app where users can browse anime titles, view details, and save favorites.
 
+## Temporary Hosting for Frontend Part
+URL: https://zian-anime-explorer.onrender.com/
+
 ## Development Started Date: 
 1 Sep 2025
 
