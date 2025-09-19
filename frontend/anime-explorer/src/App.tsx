@@ -9,7 +9,7 @@ import {AuthProvider} from "./utils/AuthContext.tsx";
 
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/anime-explorer">
             <DeviceProvider>
                 <MessageService>
                     <AuthProvider>
