@@ -14,7 +14,7 @@ export const AdminViewCounter = () => {
 
     return (
         <div className={`flex gap-3 w-full py-6 ${isMobile ? "flex-col" : "flex-row"}`}>
-            {tempCounter.map((item, index) => {
+            {tempCounter.map((item) => {
                 const Icon = item.icon;
                 const color =
                     item.label === "Total Users" ? "text-blue-500"
