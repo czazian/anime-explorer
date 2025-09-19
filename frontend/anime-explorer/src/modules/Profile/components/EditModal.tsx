@@ -127,10 +127,9 @@ export const EditModal = ({onClose}: EditModalProps) => {
                 <div className="rounded-md mb-6 p-6 w-96 bg-[#0b0e13] border border-color-[#F43F5E]">
                     <h2 className="text-lg font-bold mb-4">Edit Profile</h2>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                        <div className="flex justify-center cursor-pointer opacity-50 relative">
+                        <div className="flex justify-center cursor-pointer opacity-50 relative" onClick={handleImageClick}>
                             <FileUploadIcon className="absolute top-1/2 -translate-y-1/2" fontSize="medium"/>
                             <Box
-                                onClick={handleImageClick}
                                 sx={{
                                     border: "4px solid #1F2937",
                                     width: isMobile ? 100 : 120,

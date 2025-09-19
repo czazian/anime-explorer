@@ -38,7 +38,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
     const {isMobile} = useDevice();
     const textFieldStyles = AnimeExplorerConstants.textFieldStyles(isMobile);
 
-    const handleChangePage = (event: unknown, newPage: number) => {
+    const handleChangePage = (_event: unknown, newPage: number) => {
         setPage(newPage);
     };
 
@@ -52,7 +52,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
         const query = searchQuery.toLowerCase().trim();
 
         return data.filter((row) => {
-            const searchableFields = Object.entries(row).map(([key, value]) => {
+            const searchableFields = Object.entries(row).map(([_key, value]) => {
                 if (value === null || value === undefined) return '';
 
                 if (Array.isArray(value)) {
@@ -73,6 +73,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
     const renderCellContent = (row: User | Anime | News, column: Column) => {
         const value = (row as any)[column.id];
 
+        // User
         if (column.id === 'user' && 'username' in row) {
             const user = row as User;
             return (
@@ -90,6 +91,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             );
         }
 
+        // Role
         if (column.id === 'role' && 'role' in row) {
             const user = row as User;
             return (
@@ -101,11 +103,13 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             );
         }
 
+        // Joined Date
         if (column.id === 'joinedDate' && 'createdAt' in row) {
             const user = row as User;
             return new Date(user.createdAt).toLocaleDateString();
         }
 
+        // Anime Poster
         if (column.id === 'animePoster' && 'animePoster' in row) {
             const anime = row as Anime;
             return anime.animeImage ? (
@@ -115,6 +119,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             );
         }
 
+        // Title English
         if (column.id === 'titleEN' && 'animeName' in row) {
             const anime = row as Anime;
             return (
@@ -125,16 +130,19 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             );
         }
 
+        // Title Japanese
         if (column.id === 'titleJP' && 'animeNameJp' in row) {
             const anime = row as Anime;
             return anime.animeNameJp || 'N/A';
         }
 
+        // Release Date
         if (column.id === 'releaseDate' && 'animeReleaseDate' in row) {
             const anime = row as Anime;
             return anime.animeReleaseDate ? new Date(anime.animeReleaseDate).toLocaleDateString() : 'N/A';
         }
 
+        // Status
         if (column.id === 'status' && ('animeStatus' in row || 'role' in row)) {
             if ('animeStatus' in row) {
                 const anime = row as Anime;
@@ -150,16 +158,19 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             }
         }
 
+        // Genres
         if (column.id === 'genres' && 'animeGenres' in row) {
             const anime = row as Anime;
             return anime.animeGenres?.join(', ') || 'N/A';
         }
 
+        // Studios
         if (column.id === 'studios' && 'animeStudio' in row) {
             const anime = row as Anime;
             return anime.animeStudio?.join(', ') || 'N/A';
         }
 
+        // Description
         if (column.id === 'description' && 'animeDescription' in row) {
             const anime = row as Anime;
             return (
@@ -169,6 +180,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             );
         }
 
+        // PV
         if (column.id === 'pv' && 'animePvUrl' in row) {
             const anime = row as Anime;
             return anime.animePvUrl ? (
@@ -179,6 +191,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             ) : 'N/A';
         }
 
+        // News Poster
         if (column.id === 'newsPoster' && 'newsPoster' in row) {
             const news = row as News;
             return news.newsPoster ? (
@@ -188,16 +201,19 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             );
         }
 
+        // News Author
         if (column.id === 'newsAuthor' && 'newsAuthor' in row) {
             const news = row as News;
             return news.newsAuthor || 'Anonymous';
         }
 
+        // Posted Date
         if (column.id === 'postedDate' && 'newsPostDate' in row) {
             const news = row as News;
             return news.newsPostDate ? new Date(news.newsPostDate).toLocaleDateString() : 'N/A';
         }
 
+        // News Title
         if (column.id === 'newsTitle' && 'newsTitle' in row) {
             const news = row as News;
             return (
@@ -207,6 +223,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             );
         }
 
+        // News Descriptions
         if (column.id === 'newsDescription' && 'newsDescription' in row) {
             const news = row as News;
             return (
@@ -216,6 +233,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             );
         }
 
+        // News Content
         if (column.id === 'newsContent' && 'newsContent' in row) {
             const news = row as News;
             return (
@@ -225,6 +243,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
             );
         }
 
+        // Actions
         if (column.id === 'actions') {
             return (
                 <div className="flex gap-2">
@@ -249,7 +268,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
 
     return (
         <div>
-            <Paper sx={{backgroundColor: "#100c14", width: '100%', overflow: 'hidden', color: 'white'}}
+            <Paper sx={{backgroundColor: "transparent", width: '100%', overflow: 'hidden', color: 'white'}}
                    className="border border-color-[#F43F5E] p-6">
                 <div className={`flex flex-row ${isMobile ? "flex-col gap-2" : "flex-row items-center justify-between"}`}>
                     <TextField
@@ -322,7 +341,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
                                         style={{minWidth: column.minWidth, color: 'white'}}
                                         sx={{
                                             color: 'white',
-                                            backgroundColor: '#100c14',
+                                            backgroundColor: 'transparent',
                                             fontWeight: 'bold',
                                         }}>
                                         {column.label}
@@ -362,7 +381,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                     sx={{
-                        backgroundColor: '#100c14',
+                        backgroundColor: 'transparent',
                         color: 'white',
                         '& .MuiTablePagination-selectIcon': {color: 'white'},
                         '& .MuiTablePagination-select': {color: 'white'},
