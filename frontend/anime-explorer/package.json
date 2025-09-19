@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.4",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/poppins": "^5.2.6",
@@ -61,6 +60,7 @@
     "react-material-ui-carousel": {
       "react": "^18.3.1",
       "react-dom": "^18.3.1"
-    }
+    },
+    "@babel/runtime": "^7.28.4"
   }
 }
