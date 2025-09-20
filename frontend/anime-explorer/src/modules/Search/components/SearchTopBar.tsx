@@ -186,7 +186,7 @@ export const SearchTopBar = () => {
                 "animeName": "Sword Art Online",
                 "animeNameJp": "ソードアート・オンライン",
                 "animePvUrl": "https://youtu.be/WEmF63qOZp8",
-                "animeImage": "https://images.justwatch.com/poster/199736429/s718/sword-art-online-ii.jpg",
+                "animeImage": "https://images.justwatch.com/poster/199736429/s718/sword-art-online.jpg",
                 "animePoster": "https://cdn.myanimelist.net/images/anime/11/39717.jpg",
                 "animeDescription": "In 2022, thousands of players find themselves trapped in a virtual MMORPG. Kirito, a skilled player, must clear the deadly game to escape, but death in the game means death in real life.",
                 "animeRating": 7.2,
@@ -244,6 +244,22 @@ export const SearchTopBar = () => {
                 "animeGenres": ["Isekai", "Comedy", "Fantasy", "Parody"],
                 "animeStudio": ["Studio Deen"],
                 "season": "spring",
+            },
+            {
+                "animeId": "KNGB",
+                "animeName": "Kagurabachi",
+                "animeNameJp": "カグラバチ",
+                "animePvUrl": "https://youtu.be/Qx8uYnU2rEA",
+                "animeImage": "https://readkagura.com/wp-content/uploads/2023/10/Kagurabachi_ch002_Issue_43_2023-701x1024.jpg",
+                "animePoster": "https://readkagura.com/wp-content/uploads/2023/10/Kagurabachi_ch002_Issue_43_2023-701x1024.jpg",
+                "animeDescription": "Set in a fictional near-modern Japan, the story follows Chihiro Rokuhira, a young man who uses cursed swords. After his famous swordsmith father is murdered and six powerful cursed blades are stolen, Chihiro sets out with his father’s old friend to retrieve the blades and avenge his father. He also guards the secret of the 7th blade, Futen. “Kagurabachi” is currently serialized in Weekly Shōnen Jump. Animation adaptation by Cygames Pictures has been announced. :contentReference[oaicite:0]{index=0}",
+                "animeRating": 10.0,
+                "animeReleaseDate": 2026,
+                "animeViews": 12,
+                "animeStatus": "Upcoming",
+                "animeGenres": ["Action", "Fantasy", "Drama", "Supernatural"],
+                "animeStudio": ["Cygames Pictures"],
+                "season": "spring"
             }
         ]
 
