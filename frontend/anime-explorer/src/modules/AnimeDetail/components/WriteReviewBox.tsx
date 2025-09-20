@@ -1,6 +1,8 @@
 ﻿import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
-import {useState} from "react";
+import { Rating } from '@mui/material';
+import {type FormEvent, type SyntheticEvent, useState} from "react";
 import {useMessageService} from "../../../share-component/MessageService.tsx";
+import {useDevice} from "../../../utils/MobileContext.tsx";
 
 // interface WriteReviewBoxProps {
 //     anime?: Anime
@@ -13,23 +15,25 @@ import {useMessageService} from "../../../share-component/MessageService.tsx";
 // }
 
 export const WriteReviewBox = () => {
+    const {isMobile} = useDevice();
+
     // Call Share Component
     const { showMessage } = useMessageService();
 
     // Declare States for Submission
-    const [selectedRating, setSelectedRating] = useState(0);
+    const [selectedRating, setSelectedRating] = useState<number | null>(0);
     const [reviewContent, setReviewContent] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleRatingClick = (rating: number) => {
-        setSelectedRating(rating);
+    const handleRatingChange = (_event: SyntheticEvent, newValue: number | null) => {
+        setSelectedRating(newValue);
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
         // Return is any errors
-        if (selectedRating === 0) {
+        if (!selectedRating || selectedRating === 0) {
             alert('Please select a rating');
             return;
         }
@@ -44,7 +48,7 @@ export const WriteReviewBox = () => {
         //         ? 'No comment provided'
         //         : reviewContent.trim()
         // };
-        
+
         try {
             // Submission to Backend Database
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -69,7 +73,7 @@ export const WriteReviewBox = () => {
     };
 
     return (
-        <div className="border border-gray-800 rounded-xl p-6 min-w-[300px]">
+        <div className={`border border-gray-800 rounded-xl p-6 ${isMobile ? "" : "min-w-[300px]"}`}>
             <p className="sm:text-lg md:text-xl lg:text-xl">
                 <DriveFileRenameOutlineOutlinedIcon className="mr-2 mb-1"/>
                 Write Review
@@ -80,22 +84,27 @@ export const WriteReviewBox = () => {
                     <label className="md:text-sm sm:text-xs mt-3 font-medium">
                         Your Rating *
                     </label>
-                    <div className="flex gap-2 mt-2">
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((rating) => (
-                            <button
-                                key={rating}
-                                type="button"
-                                onClick={() => handleRatingClick(rating)}
-                                className={`
-                                    w-8 h-8 rounded-lg border-2 transition-all duration-200 font-medium
-                                    ${rating <= selectedRating
-                                    ? 'bg-gradient-primary text-white border-transparent'
-                                    : 'bg-white text-gray-600 border-gray-300 hover:border-gray-400'
-                                }
-                                `}>
-                                {rating}
-                            </button>
-                        ))}
+                    <div className="mt-2">
+                        <Rating
+                            name="anime-rating"
+                            value={selectedRating}
+                            onChange={handleRatingChange}
+                            max={10}
+                            size="large"
+                            disabled={isSubmitting}
+                            sx={{
+                                fontSize: isMobile ? "1.4rem" : "1.7rem",
+                                '& .MuiRating-icon': {
+                                    color: 'white',
+                                },
+                                '& .MuiRating-iconFilled': {
+                                    color: '#ef4444',
+                                },
+                                '& .MuiRating-iconHover': {
+                                    color: '#dc2626',
+                                },
+                            }}
+                        />
                     </div>
                 </div>
 
@@ -120,12 +129,12 @@ export const WriteReviewBox = () => {
                 <div className="flex">
                     <button
                         type="submit"
-                        disabled={isSubmitting || selectedRating === 0}
+                        disabled={isSubmitting || !selectedRating || selectedRating === 0}
                         className={`
                             px-6 py-2 w-full rounded-lg font-medium transition-all duration-200
-                            ${isSubmitting || selectedRating === 0
-                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                : 'bg-gradient-primary text-white hover:opacity-90 active:scale-95'
+                            ${isSubmitting || !selectedRating || selectedRating === 0
+                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                            : 'bg-gradient-primary text-white hover:opacity-90 active:scale-95'
                         }`}>
                         {isSubmitting ? 'Submitting...' : 'Submit Review'}
                     </button>
