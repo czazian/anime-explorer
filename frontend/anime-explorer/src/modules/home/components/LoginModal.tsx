@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { ToggleButton, ToggleButtonGroup, TextField, Button, Box } from "@mui/material";
 import { useDevice } from "../../../utils/MobileContext.tsx";
-import ApiRestService from "../../../rest-service/api-rest-service.ts";
 import type { UserCreationRequestModel } from "../../../model/ApiModel/Request/UserCreationRequestModel.ts";
 import { useMessageService } from "../../../share-component/MessageService.tsx";
 import {useAuth} from "../../../utils/AuthContext.tsx";
 import {AnimeExplorerConstants} from "../../../constants/anime-explorer-constant.ts";
+import {UserRestService} from "../../../rest-service/user-rest.service.ts";
 
 interface LoginModalProps {
     onClose: () => void;
@@ -55,7 +55,7 @@ export const LoginModal = ({ onClose }: LoginModalProps) => {
         }
 
         try {
-            const userObj = await ApiRestService.checkUserLogin(loginData);
+            const userObj = await UserRestService.checkUserLogin(loginData);
 
             if (userObj) {
                 showMessage({
@@ -97,7 +97,7 @@ export const LoginModal = ({ onClose }: LoginModalProps) => {
 
         try {
             // Call API
-            const response = await ApiRestService.createUser(user);
+            const response = await UserRestService.createUser(user);
 
             // If Successful
             if (response) {
