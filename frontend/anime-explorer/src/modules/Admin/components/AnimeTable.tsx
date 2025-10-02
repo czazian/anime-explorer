@@ -23,6 +23,7 @@ import {useDevice} from "../../../utils/MobileContext.tsx";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import AddIcon from '@mui/icons-material/Add';
 import {BatchUploadModal} from "./BatchUploadModal.tsx";
+import {AddAnimeForm} from "./AddAnimeForm.tsx";
 
 interface AdminTableProps {
     columns: readonly Column[];
@@ -37,6 +38,8 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
     const [open, setOpen] = useState(false);
     const {isMobile} = useDevice();
     const textFieldStyles = AnimeExplorerConstants.textFieldStyles(isMobile);
+
+    const [openAddTableForm, setOpenAddTableForm] = useState(false);
 
     const handleChangePage = (_event: unknown, newPage: number) => {
         setPage(newPage);
@@ -270,7 +273,8 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
         <div>
             <Paper sx={{backgroundColor: "transparent", width: '100%', overflow: 'hidden', color: 'white'}}
                    className="border border-color-[#F43F5E] p-6">
-                <div className={`flex flex-row ${isMobile ? "flex-col gap-2" : "flex-row items-center justify-between"}`}>
+                <div
+                    className={`flex flex-row ${isMobile ? "flex-col gap-2" : "flex-row items-center justify-between"}`}>
                     <TextField
                         placeholder="Search..."
                         variant="outlined"
@@ -302,6 +306,7 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
                                 }}>
                                 <FileUploadIcon fontSize="small"/>Batch Upload</Button>
                             <Button
+                                onClick={() => setOpenAddTableForm(true)}
                                 sx={{
                                     borderRadius: '8px',
                                     color: 'white',
@@ -391,7 +396,10 @@ export const AdminTable: FC<AdminTableProps> = ({columns, data, tabSelection}) =
                 />
             </Paper>
             {open && (
-              <BatchUploadModal open={open} onClose={() => setOpen(false)} />
+                <BatchUploadModal open={open} onClose={() => setOpen(false)}/>
+            )}
+            {openAddTableForm && (
+                <AddAnimeForm open={openAddTableForm} onClose={() => setOpenAddTableForm(false)}/>
             )}
         </div>
     );
