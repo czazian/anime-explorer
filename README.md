@@ -1,11 +1,12 @@
 # anime-explorer
 Description: A web app where users can browse anime titles, view details, and save favorites.
 
-## Temporary Hosting for Frontend Part
-URL: https://zian-anime-explorer.onrender.com/
-
 ## Development Started Date: 
 1 Sep 2025
+
+## Admin Password:
+Email: admin@login
+Password: admin123
 
 ## Message From Repo Owner
 Hi, this is a repo that I used to learn ReactJS for Frontend. Backend using Spring Boot. Currently, this app is under development started from 1 Sep 2025.
