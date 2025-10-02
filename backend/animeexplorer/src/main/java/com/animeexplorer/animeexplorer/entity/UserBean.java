@@ -1,5 +1,6 @@
 package com.animeexplorer.animeexplorer.entity;
 
+import com.animeexplorer.animeexplorer.entity.Helper.Auditable;
 import org.hibernate.annotations.Parameter;
 import com.animeexplorer.animeexplorer.util.PrefixedIdGenerator;
 import jakarta.persistence.*;
@@ -26,7 +27,7 @@ public class UserBean extends Auditable implements Serializable {
             type = PrefixedIdGenerator.class,
             parameters = @Parameter(name = PrefixedIdGenerator.PREFIX_PARAMETER, value = "USR")
     )
-    @Column(name = "USER_ID", nullable = false, unique = true)
+    @Column(name = "USER_ID")
     private String userId;
 
     @Column(name = "USERNAME")
@@ -46,4 +47,5 @@ public class UserBean extends Auditable implements Serializable {
 
     @Column(name = "ROLE")
     private String role;
+
 }

@@ -1,4 +1,4 @@
-package com.animeexplorer.animeexplorer.entity;
+package com.animeexplorer.animeexplorer.entity.Helper;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

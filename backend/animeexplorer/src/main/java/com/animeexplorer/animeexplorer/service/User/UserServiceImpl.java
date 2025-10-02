@@ -1,11 +1,10 @@
-package com.animeexplorer.animeexplorer.service;
+package com.animeexplorer.animeexplorer.service.User;
 
-import ch.qos.logback.core.util.StringUtil;
 import com.animeexplorer.animeexplorer.dto.request.UpdateUserRequestModal;
 import com.animeexplorer.animeexplorer.dto.request.UserCreationRequestModel;
 import com.animeexplorer.animeexplorer.dto.request.UserLoginRequestModel;
 import com.animeexplorer.animeexplorer.entity.UserBean;
-import com.animeexplorer.animeexplorer.repository.UserRepository;
+import com.animeexplorer.animeexplorer.repository.User.UserRepository;
 import com.animeexplorer.animeexplorer.util.CloudinaryService;
 import com.animeexplorer.animeexplorer.util.PasswordUtils;
 import jakarta.transaction.Transactional;
