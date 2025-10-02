@@ -1,4 +1,4 @@
-package com.animeexplorer.animeexplorer.service;
+package com.animeexplorer.animeexplorer.service.User;
 
 import com.animeexplorer.animeexplorer.dto.request.UpdateUserRequestModal;
 import com.animeexplorer.animeexplorer.dto.request.UserCreationRequestModel;

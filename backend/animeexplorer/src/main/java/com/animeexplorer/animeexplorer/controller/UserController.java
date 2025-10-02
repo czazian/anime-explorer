@@ -5,7 +5,7 @@ import com.animeexplorer.animeexplorer.dto.request.UserCreationRequestModel;
 import com.animeexplorer.animeexplorer.dto.request.UserLoginRequestModel;
 import com.animeexplorer.animeexplorer.dto.response.ResponseModel;
 import com.animeexplorer.animeexplorer.entity.UserBean;
-import com.animeexplorer.animeexplorer.service.UserService;
+import com.animeexplorer.animeexplorer.service.User.UserService;
 import com.animeexplorer.animeexplorer.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

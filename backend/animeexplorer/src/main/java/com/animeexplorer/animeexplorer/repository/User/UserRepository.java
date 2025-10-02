@@ -1,4 +1,4 @@
-package com.animeexplorer.animeexplorer.repository;
+package com.animeexplorer.animeexplorer.repository.User;
 
 import com.animeexplorer.animeexplorer.entity.UserBean;
 import org.springframework.data.jpa.repository.JpaRepository;
