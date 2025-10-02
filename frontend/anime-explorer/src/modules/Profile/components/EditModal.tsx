@@ -6,10 +6,10 @@ import {Box, CircularProgress, TextField} from "@mui/material";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import {AnimeExplorerConstants} from "../../../constants/anime-explorer-constant.ts";
 import Avatar from "../../../assets/avatar.png";
-import ApiRestService from "../../../rest-service/api-rest-service.ts";
 import {useState, useRef, type ChangeEvent} from "react";
 import {useAuth} from "../../../utils/AuthContext.tsx";
 import {useMessageService} from "../../../share-component/MessageService.tsx";
+import {UserRestService} from "../../../rest-service/user-rest.service.ts";
 
 interface EditModalProps {
     onClose: () => void;
@@ -65,7 +65,7 @@ export const EditModal = ({onClose}: EditModalProps) => {
         }
 
         try {
-            const updatedUser = await ApiRestService.updateProfile(user.userId, formData);
+            const updatedUser = await UserRestService.updateProfile(user.userId, formData);
             setUser(updatedUser);
             sessionStorage.setItem("user", JSON.stringify(updatedUser));
             setIsLoading(false);
